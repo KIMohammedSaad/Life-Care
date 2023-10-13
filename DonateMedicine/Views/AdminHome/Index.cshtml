@@ -1,0 +1,72 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<DonateMedicine.Models.Medicine>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    ViewData["Title"] = "adminhome";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    //List<Medicine> allMedicines = ViewBag.allMedicines as List<Medicine>;
+}
+<style>
+    .button {
+        border: none;
+        color: white;
+        padding: 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button3 {
+        border-radius: 8px;
+    }
+
+    tr, th {
+        border: 1px solid black;
+        min-width: 250px;
+    }
+</style>
+<div>
+    <a href="/addmedicine"><button id="addMedicine" class="button button3 btn-primary">Add Medicine Details</button></a>
+    <a href="/adminViewDonations"><button id="viewAllDonateData" class="button button3 btn-primary">View All User Donate Data</button></a>
+    <a href="/adminViewRequests"><button id="viewAllRequestData" class="button button3 btn-primary">View All User Request Data</button></a>
+</div>
+<h3 class="text-dark"> <label>Available Medicine Details</label></h3>
+<div>
+    <table>
+            <tr class="text-center">
+                <th><label>Medicine Id</label></th>
+                <th><label>Medicine Name</label></th>
+                <th><label>Medicine Category</label></th>
+                <th><label>Medicine Quantity</label></th>
+            </tr>
+  
+        
+            @if (Model.Count() > 0)
+            {
+                @foreach (var d in Model)
+                {
+
+                    <tr class="text-center">
+                        <td><label id="medId">@d.Id</label></td>
+                        <td><label id="medName">@d.Name</label></td>
+                        <td><label id="medCategory">@d.Category</label></td>
+                        <td><label id="medQuantity">@d.Quantity</label></td>
+                    </tr>
+
+                }
+
+            }
+
+    </table>
+    @if (Model.Count() == 0)
+    {
+        <label id="noData" style="text-align:center"> No Medicines Found</label>
+    }
+
+</div>

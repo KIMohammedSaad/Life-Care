@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "_Layout";
+    string loggedInUser = "";
+    if (TempData.Peek("loggedInUsername") != null)
+    {
+        loggedInUser = TempData.Peek("loggedInUsername").ToString();
+    }
+}
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+        .navBar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            height: 40px;
+            /*background-color: yellow;*/
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="navBar">
+            <div>
+                <label id="welcomeUserName">Logged In User : </label>
+                @loggedInUser
+                <a href="/adminhome">Home</a>
+                <a href="/login">Logout</a>
+            </div>
+        </div>
+        @RenderBody()
+    </div>
+</body>
+</html>

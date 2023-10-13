@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "userViewDonation";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+    List<Donation> userDonations = ViewBag.userDonations as List<Donation>;
+}
+
+<style>
+    tr, th {
+        border: 1px solid black;
+        min-width: 150px;
+    }
+</style>
+
+<div>
+    <h3><label>User Donate Details</label></h3>
+    <br />
+    <table>
+        <tr>
+            <th><label>Medicine Category</label></th>
+            <th><label>Medicine Name</label></th>
+            <th><label>Donated Quantity</label></th>
+            <th><label>Donor Name</label></th>
+            <th><label>Pickup Address</label></th>
+            <th><label>Donated Date</label></th>
+        </tr>
+        @if (userDonations.Count > 0)
+        {
+            @for (int i = 0; i < userDonations.Count; i++)
+            {
+                string medCategory = String.Format("medCategory{0}", i + 1);
+                string medName = String.Format("medName{0}", i + 1);
+                string medQty = String.Format("medQty{0}", i + 1);
+                string reqName = String.Format("reqName{0}", i + 1);
+                string pickAddress = String.Format("pickAddress{0}", i + 1);
+                string donatedDate = String.Format("donatedDate{0}", i + 1);
+                <tr>
+                    <th><label id=@medCategory>@userDonations[i].MedicineCategory</label></th>
+                    <th><label id=@medName>@userDonations[i].MedicineName</label></th>
+                    <th><label id=@medQty>@userDonations[i].DonationQuantity</label></th>
+                    <th><label id=@reqName>@userDonations[i].DonorName</label></th>
+                    <th><label id=@pickAddress>@userDonations[i].PickupAddress</label></th>
+                    <th><label id=@donatedDate>@userDonations[i].DonatedDate.ToString("dd/MM/yyyy")</label></th>
+                </tr>
+            }
+        }
+    </table>
+    @if (userDonations.Count == 0)
+    {
+        <label id="noData">No data found</label>
+    }
+</div>

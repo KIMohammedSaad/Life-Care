@@ -1,0 +1,66 @@
+﻿@model DonateMedicine.Models.Request
+@using System.Collections.Generic
+@{
+    ViewData["Title"] = "UserRequestMedicine";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+
+    String errorMessage = ViewBag.errorMessage;
+    String availableQuantity = ViewBag.Quantity;
+    List<Medicine> MedicineList = ViewBag.MedicineList as List<Medicine>;
+    var catagories=new List<string>();
+    var names = new List<string>();
+    if(MedicineList!=null && MedicineList.Count > 0)
+    {
+        foreach(Medicine med in MedicineList)
+        {
+            catagories.Add(med.Category);
+            names.Add(med.Name);
+        }
+    }
+}
+
+<style>
+    /*.button {
+        border: none;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+    }*/
+    .button2 {
+        border-radius: 4px;
+    }
+</style>
+<div>
+    <h3><label>Request Medicine</label></h3>
+    <form asp-action="Index" method="post">
+        <div class="form-group">
+            <select asp-for="MedicineCategory" id="medCategory">
+                <option value="null">Select Category</option>
+                @foreach (string c in catagories)
+                {
+                    <option value="@c">@c</option>
+                }
+            </select>
+            <select asp-for="MedicineName" id="medName">
+                <option value="null">Select Med Name</option>
+                @foreach (string name in names)
+                {
+                    <option value="@name">@name</option>
+                }
+            </select>
+            <input readonly value="Available Quantity" id="availQuantity" />
+            @*<div id="availQuantity">@availableQuantity</div>*@
+            @*@if (catagories != null && names != null)
+            {
+                <label id="availQuantity">@availableQuantity</label>
+            }*@
+            <input asp-for="RequestedQuatity" id="quantity" type="number" placeholder="Quantity" />
+            <button type="submit" id="submitRequest" class="btn button2  btn-info">Submit</button>
+            <div id="message">@errorMessage</div>
+        </div>
+    </form>
+</div>

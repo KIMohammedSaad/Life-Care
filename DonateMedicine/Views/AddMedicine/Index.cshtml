@@ -1,0 +1,56 @@
+﻿@model DonateMedicine.Models.Medicine
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    string errorMessage = ViewBag.errorMessage;
+}
+<style>
+    button {
+        background-color: blue;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        width: 60%;
+    }
+</style>
+<h3 class="text-dark">Add Medicine Details</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <form method="post" asp-action="Index">
+                <div class="form-group">
+                    <input asp-for="Name" id="medicineName" placeholder="Medicine Name" class="form-control" type="text" />
+                    <span asp-validation-for="Name" id="medicineName" class="text-danger"></span>
+                </div>
+                <br />
+
+                <div class="form-group">
+                    <input asp-for="Category" id="medicineCategory" placeholder="Medicine Category" class="form-control" type="text" />
+                    <span asp-validation-for="Category" id="medicineCategory" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input asp-for="Quantity" id="medicineQuantity" placeholder="Medicine Quantity" class="form-control" type="number" />
+                    <span asp-validation-for="Quantity" id="medicineQuantity" class="text-danger"></span>
+                </div>
+                <br />
+                
+
+                <div class="form-group">
+                    <div id="message">@errorMessage</div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <button id="medicineSubmit" class="btn btn-success" type="submit" >Add Medicine</button>
+                   @*<input type="submit" class="btn btn-success" value="Add Medicine"/>*@
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
